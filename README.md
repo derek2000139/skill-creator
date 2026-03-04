@@ -78,6 +78,18 @@ AI/
 │       ├── file_reader.py   # 主执行脚本
 │       ├── setup_env.py     # 环境配置助手
 │       └── requirements.txt # Python 依赖
+├── mcp-creator/            # MCP 服务器生成器
+│   ├── mcp-creator.md       # Meta-Skill 定义文件
+│   ├── README.md            # 项目说明文档
+│   └── scripts/
+│       ├── generate_server.py # MCP Server 代码生成器
+│       ├── validate_server.py # 生成物验证工具
+│       ├── setup_env.py       # 环境配置助手
+│       ├── requirements.txt   # 依赖清单
+│       └── examples/          # 示例配置
+│           ├── weather_api_spec.json         # 示例：天气 API Wrapper
+│           ├── sqlite_db_spec.json           # 示例：SQLite 数据库连接器
+│           └── filesystem_spec.json          # 示例：文件系统工具
 └── [其他生成的 skills]      # 后续通过 skill-creator 生成的 skills
 ```
 

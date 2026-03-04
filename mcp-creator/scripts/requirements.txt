@@ -1,0 +1,11 @@
+# MCP Creator Scripts Dependencies
+
+# For generator and validator
+python>=3.10
+
+# For generated servers (not required for scripts themselves)
+# mcp>=1.0.0
+# httpx>=0.27.0
+# uvicorn>=0.24.0 (for SSE transport)
+# starlette>=0.27.0 (for SSE transport)
+# asyncpg>=0.28.0 (for PostgreSQL)

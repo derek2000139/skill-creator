@@ -1,0 +1,76 @@
+{
+  "name": "sqlite-db-server",
+  "display_name": "SQLite Database MCP Server",
+  "description": "连接并操作 SQLite 数据库，支持查看表结构、执行查询等操作",
+  "version": "1.0.0",
+  "category": "database",
+  "transport": "stdio",
+  "language": "python",
+  "database": {
+    "type": "sqlite",
+    "env_var": "DATABASE_PATH",
+    "default_path": "./data.db",
+    "read_only": false,
+    "max_rows": 500
+  },
+  "tools": [
+    {
+      "name": "list_tables",
+      "description": "列出数据库中所有表",
+      "parameters": []
+    },
+    {
+      "name": "describe_table",
+      "description": "查看表结构",
+      "parameters": [
+        {
+          "name": "table_name",
+          "type": "string",
+          "description": "表名",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "query",
+      "description": "执行SQL查询（只读）",
+      "parameters": [
+        {
+          "name": "sql",
+          "type": "string",
+          "description": "SQL查询语句（仅SELECT）",
+          "required": true
+        },
+        {
+          "name": "limit",
+          "type": "integer",
+          "description": "结果限制行数",
+          "required": false,
+          "default": 100
+        }
+      ]
+    },
+    {
+      "name": "execute",
+      "description": "执行SQL写操作（INSERT/UPDATE/DELETE）",
+      "parameters": [
+        {
+          "name": "sql",
+          "type": "string",
+          "description": "SQL语句",
+          "required": true
+        },
+        {
+          "name": "params",
+          "type": "array",
+          "description": "参数化查询的参数列表",
+          "required": false,
+          "default": []
+        }
+      ]
+    }
+  ],
+  "ide_targets": ["trae", "cursor"],
+  "generate_skill": true,
+  "generate_tests": true
+}
