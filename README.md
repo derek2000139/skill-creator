@@ -15,12 +15,26 @@ AI Skill Factory is a project focused on creating and managing production-grade 
 - **质量验证**：内置验证工具，确保生成的 skill 符合生产级质量标准
 - **中文支持**：完整支持中文场景，包括中文文件名、列名和内容
 
+### 2. Git Mirror CN - GitHub 国内镜像加速
+- **自动选择最快镜像**：测试 8 个镜像源，自动启用最快的
+- **一键克隆**：无需配置，自动选择最佳镜像克隆仓库
+- **速度测试**：测试所有镜像连接速度，按速度排序展示
+- **交互式切换**：手动选择或自动选择镜像源
+- **跨平台支持**：Windows、macOS、Linux 全平台支持
+
 ### 1. Skill Creator Meta-Skill
 - **Requirements Analysis**：Systematically collect user requirements to ensure skill design is based on correct assumptions
 - **Architecture Selection**：Automatically recommend suitable skill types based on requirements (script-based, MCP tool-based, or prompt-based)
 - **File Generation**：Generate skill file structures and content that follow best practices
 - **Quality Validation**：Built-in validation tools to ensure generated skills meet production-level quality standards
 - **Chinese Support**：Full support for Chinese scenarios, including Chinese file names, column names, and content
+
+### 2. Git Mirror CN - GitHub Mirror Acceleration for China
+- **Auto-select fastest mirror**：Test 8 mirror sources and automatically enable the fastest one
+- **One-click clone**：No configuration needed, automatically select best mirror to clone repos
+- **Speed test**：Test all mirror connection speeds and display sorted by speed
+- **Interactive switching**：Manually or automatically select mirror source
+- **Cross-platform support**：Full support for Windows, macOS, and Linux
 
 ## 项目特点
 
@@ -90,6 +104,12 @@ AI/
 │           ├── weather_api_spec.json         # 示例：天气 API Wrapper
 │           ├── sqlite_db_spec.json           # 示例：SQLite 数据库连接器
 │           └── filesystem_spec.json          # 示例：文件系统工具
+├── git-mirror-cn/          # GitHub 国内镜像加速工具
+│   ├── git-mirror-cn.md     # Skill 定义文件
+│   └── scripts/
+│       ├── git_mirror.py    # 主执行脚本
+│       ├── setup_env.py     # 环境配置助手
+│       └── requirements.txt # Python 依赖
 └── [其他生成的 skills]      # 后续通过 skill-creator 生成的 skills
 ```
 

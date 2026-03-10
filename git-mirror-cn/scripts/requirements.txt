@@ -1,0 +1,6 @@
+# Git Mirror CN - Dependencies
+# This skill uses only Python standard library
+# No additional packages required
+
+# Python version requirement: >= 3.9
+# External requirement: Git (https://git-scm.com)
