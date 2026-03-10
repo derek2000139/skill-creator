@@ -82,14 +82,80 @@ python "path/to/git_mirror.py" --action check-env
 git --version
 ```
 
+## Smart Auto-Detection Workflow
+
+> [!IMPORTANT]
+> **AI Agent should proactively detect and handle git clone failures automatically.**
+> When any git clone/pull/fetch command fails with network-related errors, 
+> immediately invoke this skill and use `--action auto` to resolve.
+
+### Proactive Detection Triggers
+
+**Automatically activate this skill when:**
+1. User's `git clone` command fails with:
+   - `Connection timed out`
+   - `Failed to connect to github.com`
+   - `Could not resolve host: github.com`
+   - `SSL connection error`
+   - `Recv failure: Connection was reset`
+   - `Empty reply from server`
+   - Any network/timeout related error
+
+2. User mentions GitHub access issues:
+   - "GitHub 打不开"
+   - "git clone 太慢"
+   - "下载超时"
+   - "无法访问 GitHub"
+   - "clone 失败"
+
+### Automatic Resolution Flow
+
+```
+Git command failed with network error
+│
+├─ Step 1: Check if mirror is already enabled
+│  └─ Run: --action status
+│
+├─ Step 2: If mirror enabled but still failing
+│  ├─ Mirror might be down → Run: --action auto
+│  └─ This finds the fastest working mirror
+│
+├─ Step 3: If no mirror enabled
+│  └─ Run: --action auto
+│     └─ This enables the fastest mirror
+│
+└─ Step 4: Retry the original git command
+   └─ git clone https://github.com/user/repo.git
+```
+
+### Example: Automatic Failure Recovery
+
+**Scenario:** User runs `git clone https://github.com/vuejs/vue.git` and it fails.
+
+**AI Agent should:**
+
+1. **Detect the failure** and identify it as a network issue
+2. **Invoke this skill** automatically
+3. **Run auto-selection:**
+   ```powershell
+   python "SCRIPT_PATH/git_mirror.py" --action auto
+   ```
+4. **Retry the clone:**
+   ```powershell
+   git clone https://github.com/vuejs/vue.git
+   ```
+5. **Report success** to user
+
+**No user intervention needed - fully automatic!**
+
 ## Decision Tree
 
 ```
 User mentions GitHub/Git access issues
 ├─ What is the user trying to do?
 │  ├─ Clone a repository → Use --action clone or --action auto
-│  │  ├─ With auto → Find fastest mirror and clone
-│  │  └─ With clone → Test mirrors, pick fastest, clone
+│  │  ├─ With auto → Find fastest mirror and enable globally
+│  │  └─ With clone → Find fastest mirror and clone once
 │  │
 │  ├─ Push to GitHub → WARNING: Disable mirror first!
 │  │  └─ Mirror enabled → Disable mirror, then push
@@ -104,8 +170,11 @@ User mentions GitHub/Git access issues
 │  │
 │  └─ Unknown → Ask clarifying question
 │
-└─ Proactive: If git clone fails with timeout/network error
-   └─ Suggest using --action auto or --action clone
+└─ PROACTIVE: If git clone fails with timeout/network error
+   ├─ Automatically invoke this skill
+   ├─ Run --action auto to find working mirror
+   ├─ Retry the failed command
+   └─ Report success to user
 ```
 
 ## Core Workflows
